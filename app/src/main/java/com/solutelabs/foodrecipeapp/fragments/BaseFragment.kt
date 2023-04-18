@@ -2,6 +2,8 @@ package com.solutelabs.foodrecipeapp.fragments
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -11,6 +13,8 @@ import com.solutelabs.foodrecipeapp.R
 abstract class BaseFragment : Fragment() {
 
     private lateinit var rootView: View
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
