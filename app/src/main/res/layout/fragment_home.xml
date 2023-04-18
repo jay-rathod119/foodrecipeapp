@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.HomeFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:defaultQueryHint="Search Here"
+        android:background="@drawable/border"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/dp_12"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:iconifiedByDefault="false"
+        />
+
+    <HorizontalScrollView
+        android:id="@+id/horizontal_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/chip_beef"
+                    android:text="@string/beef"
+                style="@style/ButtonStyle" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/chip_carrot"
+                    android:text="@string/carrot"
+                    style="@style/ButtonStyle" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/chip_potato"
+                    style="@style/ButtonStyle"
+                    android:text="@string/potato" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/chip_onion"
+                    style="@style/ButtonStyle"
+                    android:text="@string/onion"
+                     />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/chip_soups"
+                    style="@style/ButtonStyle"
+                    android:text="@string/soups"
+                     />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/chip_chicken"
+                    style="@style/ButtonStyle"
+                    android:text="@string/chicken"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/chip_cake"
+                    style="@style/ButtonStyle"
+                    android:text="@string/cake"
+                    />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </HorizontalScrollView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewRecipeList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view" />
+
+
+
+    <include layout="@layout/item_layout_no_data"
+        android:id="@+id/no_data_layout"
+        android:visibility="gone"/>
+
+    <include layout="@layout/item_layout_shimmer"
+        android:id="@+id/shimmer_layout"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
