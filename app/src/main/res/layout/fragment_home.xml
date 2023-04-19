@@ -21,62 +21,17 @@
         app:iconifiedByDefault="false"
         />
 
-    <HorizontalScrollView
-        android:id="@+id/horizontal_scroll_view"
-        android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/horizontalScrollViewButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:scrollbars="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/searchView">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
 
-            <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/chip_beef"
-                    android:text="@string/beef"
-                style="@style/ButtonStyle" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/chip_carrot"
-                    android:text="@string/carrot"
-                    style="@style/ButtonStyle" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/chip_potato"
-                    style="@style/ButtonStyle"
-                    android:text="@string/potato" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/chip_onion"
-                    style="@style/ButtonStyle"
-                    android:text="@string/onion"
-                     />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/chip_soups"
-                    style="@style/ButtonStyle"
-                    android:text="@string/soups"
-                     />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/chip_chicken"
-                    style="@style/ButtonStyle"
-                    android:text="@string/chicken"
-                    />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/chip_cake"
-                    style="@style/ButtonStyle"
-                    android:text="@string/cake"
-                    />
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </HorizontalScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -87,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/horizontal_scroll_view" />
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewButton" />
 
 
 

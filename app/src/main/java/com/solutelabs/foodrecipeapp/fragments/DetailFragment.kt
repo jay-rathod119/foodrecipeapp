@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.solutelabs.foodrecipeapp.R
 import com.solutelabs.foodrecipeapp.databinding.FragmentDetailBinding
 import com.solutelabs.foodrecipeapp.databinding.FragmentHomeBinding
+import com.solutelabs.foodrecipeapp.model.Recipe
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 
@@ -23,25 +24,17 @@ class DetailFragment : BaseFragment() {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        val bundle = arguments
-        if (bundle != null) {
-            val imageUri = bundle.getString(ARG_FEATURED_IMAGE)
-            val titleText = bundle.getString(ARG_TITLE)
-            val ingredients = bundle.getStringArrayList(ARG_INGREDIENTS)
+        binding.textviewDetailRecipeTitle.text = recipeBody!!.title
 
-            binding.textviewDetailRecipeTitle.text = titleText
-
-            ingredients?.let {
-                for (ingredient in it) {
-                    binding.textviewDetailRecipeIngredients.append("\n -> $ingredient\n")
-                }
+        recipeBody!!.ingredients?.let {
+            for (ingredient in it) {
+                binding.textviewDetailRecipeIngredients.append("\n -> $ingredient\n")
             }
-
-            Glide.with(this)
-                .load(imageUri)
-                .into(binding.imageviewDetailRecipeImage)
-
         }
+
+        Glide.with(this)
+            .load(recipeBody!!.featured_image)
+            .into(binding.imageviewDetailRecipeImage)
 
         return view
     }
@@ -49,16 +42,14 @@ class DetailFragment : BaseFragment() {
 
 
     companion object {
-        private const val ARG_FEATURED_IMAGE = "featured_image"
-        private const val ARG_TITLE = "title"
-        private const val ARG_INGREDIENTS = "ingredients"
+        private const val ARG_RECIPE = "recipe"
+        var recipeBody: Recipe? = null
 
-        fun newInstance(featuredImage: String, title: String, ingredients: ArrayList<String>): DetailFragment {
-            val fragment = DetailFragment()
+        fun newInstance(resultX: Recipe): DetailFragment {
             val args = Bundle()
-            args.putString(ARG_FEATURED_IMAGE, featuredImage)
-            args.putString(ARG_TITLE, title)
-            args.putStringArrayList(ARG_INGREDIENTS, ingredients)
+            //args.putParcelable(ARG_RECIPE, result)
+            val fragment = DetailFragment()
+            recipeBody = resultX
             fragment.arguments = args
             return fragment
         }

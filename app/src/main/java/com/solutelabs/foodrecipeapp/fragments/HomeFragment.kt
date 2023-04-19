@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.solutelabs.foodrecipeapp.R
-import com.solutelabs.foodrecipeapp.RecipeAdapter
-import com.solutelabs.foodrecipeapp.RecipeService
+import com.solutelabs.foodrecipeapp.*
 import com.solutelabs.foodrecipeapp.databinding.FragmentHomeBinding
 import com.solutelabs.foodrecipeapp.model.RecipeSearchResponse
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -21,6 +19,7 @@ import retrofit2.Response
 
 class HomeFragment : BaseFragment() {
 
+
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: RecipeAdapter
@@ -29,7 +28,6 @@ class HomeFragment : BaseFragment() {
     var totalResults = -1
     var defaultsearchQuery = "beef carrot potato onion"
     var searchQuery = " "
-    private var selectedButton: Button? = null
 
 
     override fun onCreateView(
@@ -52,19 +50,30 @@ class HomeFragment : BaseFragment() {
             getRecipes(pageNum, defaultsearchQuery)
         }
 
-        adapter = RecipeAdapter(requireContext(), emptyList())
+        adapter = RecipeAdapter(requireContext(), emptyList(),requireActivity().supportFragmentManager)
         binding.recycleViewRecipeList.adapter = adapter
         binding.recycleViewRecipeList.layoutManager = LinearLayoutManager(requireContext())
 
         getRecipes(pageNum, defaultsearchQuery)
 
-        setButtonListener(binding.chipBeef, KEYWORD_BEEF)
-        setButtonListener(binding.chipCarrot, KEYWORD_CARROT)
-        setButtonListener(binding.chipPotato, KEYWORD_POTATO)
-        setButtonListener(binding.chipOnion, KEYWORD_ONION)
-        setButtonListener(binding.chipSoups, KEYWORD_SOUP)
-        setButtonListener(binding.chipChicken, KEYWORD_CHICKEN)
-        setButtonListener(binding.chipCake, KEYWORD_CAKE)
+        val buttonAdapter = ButtonAdapter(listOf(
+            KEYWORD_BEEF,
+            KEYWORD_CARROT,
+            KEYWORD_POTATO,
+            KEYWORD_ONION,
+            KEYWORD_SOUP,
+            KEYWORD_CHICKEN,
+            KEYWORD_CAKE
+        )) { keyword ->
+            searchQuery = keyword
+            getRecipes(pageNum, searchQuery)
+        }
+
+
+        binding.horizontalScrollViewButton.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = buttonAdapter
+        }
 
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -73,7 +82,7 @@ class HomeFragment : BaseFragment() {
                 } else if (searchQuery.isNotEmpty()) {
                     restorePreviousSearchResults()
                 } else {
-                    showSnackBar(requireContext().getString(R.string.please_enter_a_search_query))
+                    showSnackBar(getString(R.string.please_enter_a_search_query))
                 }
                 return false
             }
@@ -111,11 +120,11 @@ class HomeFragment : BaseFragment() {
                         adapter.recipes = recipes.results
 
                         if (recipes.results.isEmpty()) {
-                            recycleViewRecipeList.visibility = View.GONE
-                            no_data_layout.visibility = View.VISIBLE
+                            recycleViewRecipeList?.visibility = View.GONE
+                            no_data_layout?.visibility = View.VISIBLE
                         } else {
-                            recycleViewRecipeList.visibility = View.VISIBLE
-                            no_data_layout.visibility = View.GONE
+                            recycleViewRecipeList?.visibility = View.VISIBLE
+                            no_data_layout?.visibility = View.GONE
                             adapter.notifyDataSetChanged()
                         }
                     } else {
@@ -123,38 +132,38 @@ class HomeFragment : BaseFragment() {
                     }
 
                     if (recipes.results.isEmpty()) {
-                        showSnackBar(requireContext().getString(R.string.no_results_found)+ " $searchQuery")
+                        showSnackBar(getString(R.string.no_results_found)+ " $searchQuery")
                     }
                 } else {
-                    showSnackBar(requireContext().getString(R.string.no_results_found)+ " $searchQuery")
+                    showSnackBar(getString(R.string.no_results_found)+ " $searchQuery")
                 }
             }
 
             override fun onFailure(call: Call<RecipeSearchResponse>, t: Throwable) {
-                showSnackBar(requireContext().getString(R.string.error_while_fetching_data))
+                showSnackBar(getString(R.string.error_while_fetching_data))
             }
         })
     }
 
 
-    fun setButtonListener(button: Button, keyword: String) {
-        button.setOnClickListener {
-            if (!button.isSelected) {
-                // Button is not selected, so select it
-                getRecipes(pageNum, keyword)
-                button.isSelected = true
-            } else {
-                // Button is already selected, so deselect it
-                getRecipes(pageNum, defaultsearchQuery)
-                button.isSelected = false
-            }
-            // Deselect the previously selected button
-            selectedButton?.isSelected = false
-
-            // Update the reference to the selected button
-            selectedButton = if (button.isSelected) button else null
-        }
-    }
+//    fun setButtonListener(button: Button, keyword: String) {
+//        button.setOnClickListener {
+//            if (!button.isSelected) {
+//                // Button is not selected, so select it
+//                getRecipes(pageNum, keyword)
+//                button.isSelected = true
+//            } else {
+//                // Button is already selected, so deselect it
+//                getRecipes(pageNum, defaultsearchQuery)
+//                button.isSelected = false
+//            }
+//            // Deselect the previously selected button
+//            selectedButton?.isSelected = false
+//
+//            // Update the reference to the selected button
+//            selectedButton = if (button.isSelected) button else null
+//        }
+//    }
 
     fun loadMore() {
         if (adapter.recipes.size < totalResults) {

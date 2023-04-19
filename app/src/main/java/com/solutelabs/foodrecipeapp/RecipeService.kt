@@ -1,6 +1,7 @@
 package com.solutelabs.foodrecipeapp
 
 
+
 import com.solutelabs.foodrecipeapp.model.RecipeSearchResponse
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -9,15 +10,12 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 
-
-//https://food2fork.ca/api/recipe/search/?page=2&query=beef carrot potato onion
-
-const val BASE_URL = "https://food2fork.ca/api/recipe/"
-const val KEY_TOKEN = "Token 9c8b06d329136da358c2d00e76946b0111ce2c48"
+const val BASE_URL = BuildConfig.BASE_URL
+const val KEY_TOKEN = BuildConfig.KEY_TOKEN
 
 interface RecipeInterface {
 
-    @Headers("Accept: application/json", "Authorization: ${KEY_TOKEN}")
+    @Headers("Accept: application/json", "Authorization: $KEY_TOKEN")
     @GET("search/")
     fun getAllRecipes(
         @Query("page") page: Int,
@@ -25,7 +23,6 @@ interface RecipeInterface {
     ): Call<RecipeSearchResponse>
 
 }
-
 
 object RecipeService{
     val RecipeInstance : RecipeInterface

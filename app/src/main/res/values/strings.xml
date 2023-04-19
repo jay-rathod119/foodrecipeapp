@@ -13,10 +13,11 @@
     <string name="cake">CAKE</string>
     <string name="title">Title</string>
     <string name="rating">Rating</string>
-    <string name="no_results_found">No results found</string>
+    <string name="no_results_found">No results found - </string>
     <string name="error_while_fetching_data">Error while Fetching Data</string>
     <string name="please_enter_a_search_query">Please enter a search query</string>
     <string name="checked">Checked</string>
     <string name="saved">Saved</string>
+    <string name="beef_carrot_potato_onion">beef carrot potato onion</string>
     <string name="save">Save</string>
 </resources>
