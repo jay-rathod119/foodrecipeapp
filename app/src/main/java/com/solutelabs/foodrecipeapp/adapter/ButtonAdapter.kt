@@ -1,10 +1,11 @@
-package com.solutelabs.foodrecipeapp
+package com.solutelabs.foodrecipeapp.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.solutelabs.foodrecipeapp.R
 
 class ButtonAdapter(
     private val keywords: List<String>,

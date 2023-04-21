@@ -1,27 +1,22 @@
-package com.solutelabs.foodrecipeapp
+package com.solutelabs.foodrecipeapp.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.solutelabs.foodrecipeapp.R
 import com.solutelabs.foodrecipeapp.databinding.ItemLayoutBinding
-import com.solutelabs.foodrecipeapp.fragments.BaseFragment
-import com.solutelabs.foodrecipeapp.fragments.DetailFragment
 import com.solutelabs.foodrecipeapp.model.Recipe
-import kotlinx.android.synthetic.main.item_layout.view.*
+import com.solutelabs.foodrecipeapp.utils.ImageLoaderUtil
 
 
-class RecipeAdapter(val context: Context, var recipes: List<Recipe>,var fragmentManager: FragmentManager) :
+class RecipeAdapter(private val context: Context, var recipes: List<Recipe>, private val listener: RecipeItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var recyclerView: RecyclerView? = null
     private var isLoading = false
-
 
     private var checkedStateMap = mutableMapOf<Int, Boolean>()
 
@@ -38,7 +33,7 @@ class RecipeAdapter(val context: Context, var recipes: List<Recipe>,var fragment
         }
     }
 
-    inner class RecipeViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class RecipeViewHolder(binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         var recipeImage = binding.imageviewRecipeImage
         var recipeTitle = binding.textviewRecipeTitle
         var recipeRating = binding.textviewRecipeRating
@@ -60,8 +55,6 @@ class RecipeAdapter(val context: Context, var recipes: List<Recipe>,var fragment
         }
     }
 
-
-
     override fun getItemCount(): Int {
         return if (isLoading || recipes.isEmpty()) 6 else recipes.size
     }
@@ -69,7 +62,6 @@ class RecipeAdapter(val context: Context, var recipes: List<Recipe>,var fragment
     override fun getItemViewType(position: Int): Int {
         return if (isLoading || recipes.isEmpty()) VIEW_TYPE_SHIMMER else VIEW_TYPE_RECIPE
     }
-
 
     fun addRecipes(newRecipes: List<Recipe>) {
         val oldSize = recipes.size
@@ -90,23 +82,12 @@ class RecipeAdapter(val context: Context, var recipes: List<Recipe>,var fragment
                 .placeholder(R.drawable.imge)
                 .into(holder.recipeImage)
 
-            holder.itemView.setOnClickListener {
-                val fragment = DetailFragment.newInstance(recipe)
-                fragment.replaceFragmentWithDetailFragment(fragmentManager)
+            ImageLoaderUtil.load(context, recipe.featured_image, holder.recipeImage)
 
+            holder.itemView.setOnClickListener {
+                listener.onRecipeItemClicked(recipe)
             }
 
-//            holder.itemView.setOnClickListener {
-//                val fragment = DetailFragment.newInstance(
-//                    recipe.featured_image,
-//                    recipe.title,
-//                    ArrayList(recipe.ingredients)
-//                )
-//                val transaction = (context as AppCompatActivity).supportFragmentManager.beginTransaction()
-//                transaction.replace(R.id.nav_host_fragment, fragment)
-//                transaction.addToBackStack(null)
-//                transaction.commit()
-//            }
 
 
             holder.recipeCheckbox.setOnClickListener {
@@ -118,5 +99,8 @@ class RecipeAdapter(val context: Context, var recipes: List<Recipe>,var fragment
         }
     }
 
+    interface RecipeItemClickListener {
+        fun onRecipeItemClicked(recipe: Recipe)
+    }
 
 }

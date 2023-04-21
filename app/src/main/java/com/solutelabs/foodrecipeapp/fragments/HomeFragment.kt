@@ -1,15 +1,16 @@
 package com.solutelabs.foodrecipeapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.solutelabs.foodrecipeapp.*
+import com.solutelabs.foodrecipeapp.adapter.ButtonAdapter
+import com.solutelabs.foodrecipeapp.adapter.RecipeAdapter
 import com.solutelabs.foodrecipeapp.databinding.FragmentHomeBinding
+import com.solutelabs.foodrecipeapp.model.Recipe
 import com.solutelabs.foodrecipeapp.model.RecipeSearchResponse
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
@@ -17,8 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class HomeFragment : BaseFragment() {
-
+class HomeFragment : BaseFragment(), RecipeAdapter.RecipeItemClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -26,9 +26,8 @@ class HomeFragment : BaseFragment() {
 
     var pageNum = 1
     var totalResults = -1
-    var defaultsearchQuery = "beef carrot potato onion"
-    var searchQuery = " "
-
+    var defaultsearchQuery = Constants.constDefaultQuery
+    var searchQuery = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +49,7 @@ class HomeFragment : BaseFragment() {
             getRecipes(pageNum, defaultsearchQuery)
         }
 
-        adapter = RecipeAdapter(requireContext(), emptyList(),requireActivity().supportFragmentManager)
+        adapter = RecipeAdapter(requireContext(), emptyList(),this)
         binding.recycleViewRecipeList.adapter = adapter
         binding.recycleViewRecipeList.layoutManager = LinearLayoutManager(requireContext())
 
@@ -68,7 +67,6 @@ class HomeFragment : BaseFragment() {
             searchQuery = keyword
             getRecipes(pageNum, searchQuery)
         }
-
 
         binding.horizontalScrollViewButton.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -118,7 +116,6 @@ class HomeFragment : BaseFragment() {
                     totalResults = recipes.count
                     if (pageNum == 1) {
                         adapter.recipes = recipes.results
-
                         if (recipes.results.isEmpty()) {
                             recycleViewRecipeList?.visibility = View.GONE
                             no_data_layout?.visibility = View.VISIBLE
@@ -145,33 +142,12 @@ class HomeFragment : BaseFragment() {
         })
     }
 
-
-//    fun setButtonListener(button: Button, keyword: String) {
-//        button.setOnClickListener {
-//            if (!button.isSelected) {
-//                // Button is not selected, so select it
-//                getRecipes(pageNum, keyword)
-//                button.isSelected = true
-//            } else {
-//                // Button is already selected, so deselect it
-//                getRecipes(pageNum, defaultsearchQuery)
-//                button.isSelected = false
-//            }
-//            // Deselect the previously selected button
-//            selectedButton?.isSelected = false
-//
-//            // Update the reference to the selected button
-//            selectedButton = if (button.isSelected) button else null
-//        }
-//    }
-
     fun loadMore() {
         if (adapter.recipes.size < totalResults) {
             pageNum++
             getRecipes(pageNum, searchQuery)
         }
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -180,6 +156,7 @@ class HomeFragment : BaseFragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+
                 val lastVisiblePosition = layoutManager.findLastVisibleItemPosition()
 //                29 = 30 - 1
                 if(lastVisiblePosition == adapter.recipes.size - 1) {
@@ -190,6 +167,7 @@ class HomeFragment : BaseFragment() {
     }
 
     companion object{
+
         const val KEY_SEARCH_QUERY = "searchQuery"
         const val KEY_PAGE_NUM = "pageNum"
         const val KEYWORD_BEEF = "beef"
@@ -200,13 +178,16 @@ class HomeFragment : BaseFragment() {
         const val KEYWORD_CHICKEN = "chicken"
         const val KEYWORD_CAKE = "cake"
 
+    }
 
+    override fun onRecipeItemClicked(recipe: Recipe) {
+        val fragment = DetailFragment.newInstance(recipe)
+        fragment.replaceFragmentWithDetailFragment(requireActivity().supportFragmentManager,DetailFragment(),Constants.constDetailFragment)
     }
 
     private fun performSearch(query: String) {
         pageNum = 1
-        searchQuery = query
-        getRecipes(pageNum, searchQuery)
+        getRecipes(pageNum, query)
     }
 
     private fun restorePreviousSearchResults() {
