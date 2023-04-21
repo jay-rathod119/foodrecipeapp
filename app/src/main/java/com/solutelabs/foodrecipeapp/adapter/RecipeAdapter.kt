@@ -88,8 +88,6 @@ class RecipeAdapter(private val context: Context, var recipes: List<Recipe>, pri
                 listener.onRecipeItemClicked(recipe)
             }
 
-
-
             holder.recipeCheckbox.setOnClickListener {
                 checkedStateMap[recipe.pk] = holder.recipeCheckbox.isChecked
             }

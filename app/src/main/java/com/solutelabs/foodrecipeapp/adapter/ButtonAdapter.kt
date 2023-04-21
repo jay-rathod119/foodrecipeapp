@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.solutelabs.foodrecipeapp.R
+import com.solutelabs.foodrecipeapp.databinding.ItemButtonBinding
+import com.solutelabs.foodrecipeapp.databinding.ItemLayoutBinding
 
 class ButtonAdapter(
     private val keywords: List<String>,
@@ -14,14 +16,15 @@ class ButtonAdapter(
 
     private var selectedButton: Button? = null
 
-    inner class KeywordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val button: Button = itemView.findViewById(R.id.button_keyword)
+    inner class KeywordViewHolder(private val binding: ItemButtonBinding) : RecyclerView.ViewHolder(binding.root) {
+        val button: Button = binding.buttonKeyword
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KeywordViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_button, parent, false)
-        return KeywordViewHolder(view)
+        val binding = ItemButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return KeywordViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: KeywordViewHolder, position: Int) {
         val keyword = keywords[position]
