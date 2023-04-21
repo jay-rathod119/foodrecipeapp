@@ -77,11 +77,6 @@ class RecipeAdapter(private val context: Context, var recipes: List<Recipe>, pri
             holder.recipeTitle.text = recipe.title
             holder.recipeRating.text = recipe.rating.toString()
 
-            Glide.with(context)
-                .load(recipe.featured_image).override(600,400)
-                .placeholder(R.drawable.imge)
-                .into(holder.recipeImage)
-
             ImageLoaderUtil.load(context, recipe.featured_image, holder.recipeImage)
 
             holder.itemView.setOnClickListener {
