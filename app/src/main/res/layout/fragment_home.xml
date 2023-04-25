@@ -11,7 +11,7 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:defaultQueryHint="Search Here"
+        app:defaultQueryHint="@string/search_here"
         android:background="@drawable/border"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/dp_12"
@@ -30,21 +30,44 @@
         android:scrollbars="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/searchView">
 
-
     </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30"
+        android:text="@string/all_recipes"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginStart="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewButton"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/clearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30"
+        android:textSize="@dimen/sp_11"
+        android:text="@string/clear"
+        android:background="@drawable/border"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewButton"
+        app:layout_constraintEnd_toEndOf="@+id/recycleViewRecipeList"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_4"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewRecipeList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="@dimen/dp_0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollViewButton" />
-
-
+        android:layout_marginTop="@dimen/dp_6"
+        app:layout_constraintTop_toBottomOf="@+id/clearButton" />
 
     <include layout="@layout/item_layout_no_data"
         android:id="@+id/no_data_layout"

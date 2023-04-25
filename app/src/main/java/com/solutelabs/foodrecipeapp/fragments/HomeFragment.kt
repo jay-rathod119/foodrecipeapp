@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.solutelabs.foodrecipeapp.*
@@ -71,6 +72,10 @@ class HomeFragment : BaseFragment(), RecipeAdapter.RecipeItemClickListener {
         binding.horizontalScrollViewButton.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = buttonAdapter
+        }
+
+        binding.clearButton.setOnClickListener {
+            clearSavedRecipes()
         }
 
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -183,6 +188,17 @@ class HomeFragment : BaseFragment(), RecipeAdapter.RecipeItemClickListener {
     override fun onRecipeItemClicked(recipe: Recipe) {
         val fragment = DetailFragment.newInstance(recipe)
         fragment.replaceFragmentWithDetailFragment(requireActivity().supportFragmentManager,DetailFragment(),Constants.constDetailFragment)
+    }
+
+    fun clearSavedRecipes(){
+        val checkedRecipes = adapter.getCheckedRecipes()
+        if (checkedRecipes.isEmpty()) {
+            showSnackBar(getString(R.string.no_saved_recipes))
+        } else {
+            checkedRecipes.clear()
+            adapter.notifyDataSetChanged()
+            showSnackBar(getString(R.string.cleared_saved_recipes))
+        }
     }
 
     private fun performSearch(query: String) {

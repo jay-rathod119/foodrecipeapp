@@ -63,6 +63,10 @@ class RecipeAdapter(private val context: Context, var recipes: List<Recipe>, pri
         return if (isLoading || recipes.isEmpty()) VIEW_TYPE_SHIMMER else VIEW_TYPE_RECIPE
     }
 
+    fun getCheckedRecipes(): MutableMap<Int, Boolean> {
+        return checkedStateMap
+    }
+
     fun addRecipes(newRecipes: List<Recipe>) {
         val oldSize = recipes.size
         recipes += newRecipes

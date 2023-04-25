@@ -20,4 +20,9 @@
     <string name="saved">Saved</string>
     <string name="beef_carrot_potato_onion">beef carrot potato onion</string>
     <string name="save">Save</string>
+    <string name="clear">Clear</string>
+    <string name="all_recipes">All Recipes</string>
+    <string name="cleared_saved_recipes">Cleared Saved Recipes</string>
+    <string name="no_saved_recipes">No saved recipes</string>
+    <string name="search_here">Search Here</string>
 </resources>
