@@ -1,8 +1,8 @@
-package com.solutelabs.foodrecipeapp
+package com.androidprojects.foodrecipeapp
 
 
 
-import com.solutelabs.foodrecipeapp.model.RecipeSearchResponse
+import com.androidprojects.foodrecipeapp.model.RecipeSearchResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,12 +1,12 @@
-package com.solutelabs.foodrecipeapp.fragments
+package com.androidprojects.foodrecipeapp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.solutelabs.foodrecipeapp.databinding.FragmentDetailBinding
-import com.solutelabs.foodrecipeapp.model.Recipe
-import com.solutelabs.foodrecipeapp.utils.ImageLoaderUtil
+import com.androidprojects.foodrecipeapp.databinding.FragmentDetailBinding
+import com.androidprojects.foodrecipeapp.model.Recipe
+import com.androidprojects.foodrecipeapp.utils.ImageLoaderUtil
 
 
 class DetailFragment : BaseFragment() {

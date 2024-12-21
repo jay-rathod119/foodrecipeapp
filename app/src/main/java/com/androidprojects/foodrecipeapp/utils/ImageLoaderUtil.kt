@@ -1,9 +1,9 @@
-package com.solutelabs.foodrecipeapp.utils
+package com.androidprojects.foodrecipeapp.utils
 
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.solutelabs.foodrecipeapp.R
+import com.androidprojects.foodrecipeapp.R
 
 object ImageLoaderUtil {
     fun load(context: Context, imageUrl: String,imageView: ImageView) {

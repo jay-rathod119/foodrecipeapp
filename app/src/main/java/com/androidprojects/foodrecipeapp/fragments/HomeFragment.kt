@@ -1,18 +1,17 @@
-package com.solutelabs.foodrecipeapp.fragments
+package com.androidprojects.foodrecipeapp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.solutelabs.foodrecipeapp.*
-import com.solutelabs.foodrecipeapp.adapter.ButtonAdapter
-import com.solutelabs.foodrecipeapp.adapter.RecipeAdapter
-import com.solutelabs.foodrecipeapp.databinding.FragmentHomeBinding
-import com.solutelabs.foodrecipeapp.model.Recipe
-import com.solutelabs.foodrecipeapp.model.RecipeSearchResponse
+import com.androidprojects.foodrecipeapp.*
+import com.androidprojects.foodrecipeapp.adapter.ButtonAdapter
+import com.androidprojects.foodrecipeapp.adapter.RecipeAdapter
+import com.androidprojects.foodrecipeapp.databinding.FragmentHomeBinding
+import com.androidprojects.foodrecipeapp.model.Recipe
+import com.androidprojects.foodrecipeapp.model.RecipeSearchResponse
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -109,7 +108,6 @@ class HomeFragment : BaseFragment(), RecipeAdapter.RecipeItemClickListener {
     }
 
     private fun getRecipes(pageNum: Int, searchQuery: String) {
-
         val recipes = RecipeService.RecipeInstance.getAllRecipes(pageNum, searchQuery)
         recipes.enqueue(object : Callback<RecipeSearchResponse> {
             override fun onResponse(

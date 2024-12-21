@@ -1,4 +1,4 @@
-package com.solutelabs.foodrecipeapp.model
+package com.androidprojects.foodrecipeapp.model
 
 import com.google.gson.annotations.SerializedName
 

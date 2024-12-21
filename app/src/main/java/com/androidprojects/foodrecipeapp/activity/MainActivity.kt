@@ -1,8 +1,8 @@
-package com.solutelabs.foodrecipeapp.activity
+package com.androidprojects.foodrecipeapp.activity
 
 
 import android.os.Bundle
-import com.solutelabs.foodrecipeapp.R
+import com.androidprojects.foodrecipeapp.R
 
 
 class MainActivity : BaseActivity() {

@@ -7,16 +7,15 @@ plugins {
 }
 
 android {
-    namespace 'com.solutelabs.foodrecipeapp'
+    namespace 'com.androidprojects.foodrecipeapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.solutelabs.foodrecipeapp"
+        applicationId "com.androidprojects.foodrecipeapp"
         minSdk 28
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

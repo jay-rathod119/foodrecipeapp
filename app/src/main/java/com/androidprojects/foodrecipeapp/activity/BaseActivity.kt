@@ -1,11 +1,11 @@
-package com.solutelabs.foodrecipeapp.activity
+package com.androidprojects.foodrecipeapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.solutelabs.foodrecipeapp.Constants
-import com.solutelabs.foodrecipeapp.R
-import com.solutelabs.foodrecipeapp.fragments.DetailFragment
-import com.solutelabs.foodrecipeapp.fragments.HomeFragment
+import com.androidprojects.foodrecipeapp.Constants
+import com.androidprojects.foodrecipeapp.R
+import com.androidprojects.foodrecipeapp.fragments.DetailFragment
+import com.androidprojects.foodrecipeapp.fragments.HomeFragment
 
 abstract class BaseActivity : AppCompatActivity()
 

@@ -1,4 +1,4 @@
-package com.solutelabs.foodrecipeapp.fragments
+package com.androidprojects.foodrecipeapp.fragments
 
 
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
-import com.solutelabs.foodrecipeapp.R
+import com.androidprojects.foodrecipeapp.R
 
 abstract class BaseFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.solutelabs.foodrecipeapp
+package com.androidprojects.foodrecipeapp
 
 class Constants{
     companion object{

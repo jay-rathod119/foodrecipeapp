@@ -1,15 +1,14 @@
-package com.solutelabs.foodrecipeapp.adapter
+package com.androidprojects.foodrecipeapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.solutelabs.foodrecipeapp.R
-import com.solutelabs.foodrecipeapp.databinding.ItemLayoutBinding
-import com.solutelabs.foodrecipeapp.model.Recipe
-import com.solutelabs.foodrecipeapp.utils.ImageLoaderUtil
+import com.androidprojects.foodrecipeapp.R
+import com.androidprojects.foodrecipeapp.databinding.ItemLayoutBinding
+import com.androidprojects.foodrecipeapp.model.Recipe
+import com.androidprojects.foodrecipeapp.utils.ImageLoaderUtil
 
 
 class RecipeAdapter(private val context: Context, var recipes: List<Recipe>, private val listener: RecipeItemClickListener) :
