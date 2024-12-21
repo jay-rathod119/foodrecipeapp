@@ -5,10 +5,10 @@
     app:startDestination="@id/HomeFragment">
     <fragment
         android:id="@+id/HomeFragment"
-        android:name="com.solutelabs.foodrecipeapp.fragments.HomeFragment"
+        android:name="com.androidprojects.foodrecipeapp.fragments.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/DetailFragment"
-        android:name="com.solutelabs.foodrecipeapp.fragments.DetailFragment"
+        android:name="com.androidprojects.foodrecipeapp.fragments.DetailFragment"
         android:label="DetailFragment" />
 </navigation>

@@ -1,19 +1,15 @@
-package com.solutelabs.foodrecipeapp
+package com.androidprojects.foodrecipeapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.solutelabs.foodrecipeapp.fragments.DetailFragment
-import com.solutelabs.foodrecipeapp.fragments.HomeFragment
+import com.androidprojects.foodrecipeapp.Constants
+import com.androidprojects.foodrecipeapp.R
+import com.androidprojects.foodrecipeapp.fragments.DetailFragment
+import com.androidprojects.foodrecipeapp.fragments.HomeFragment
 
-class MainActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-    }
+{
 
     fun navigateToFragment(fragment: Fragment, tag: String, addToBackStack: Boolean) {
         supportFragmentManager.beginTransaction()
@@ -32,13 +28,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             val currentFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
             if (currentFragment is DetailFragment) {
-                navigateToFragment(HomeFragment(), "HomeFragment", false)
+                navigateToFragment(HomeFragment(), Constants.constHomeFragment, false)
             } else {
                 super.onBackPressed()
             }
         }
     }
-
-
 
 }
